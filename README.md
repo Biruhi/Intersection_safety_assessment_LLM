@@ -226,12 +226,4 @@ Transportation Engineering | Traffic Safety | Explainable Artificial Intelligenc
 
 ---
 
-## Citation
 
-```bibtex
-@misc{abeje2026intersection,
-  title={Fine-Tuning a Lightweight Large Language Model for Intersection Safety Assessment Reporting},
-  author={Abeje, Biruhi Tesfaye},
-  year={2026}
-}
-```
