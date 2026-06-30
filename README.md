@@ -1,264 +1,218 @@
-# Intersection Safety Assessment Reporting using a Fine-Tuned Lightweight Large Language Model (LLM)
+# 🚦 Fine-Tuning a Lightweight Large Language Model for Intersection Safety Assessment Reporting
 
 ## Overview
 
-This project develops and evaluates a lightweight Large Language Model (LLM) for automated intersection safety assessment reporting. The framework generates transportation-engineering safety reports from structured intersection characteristics and operational observations.
+This repository presents a complete framework for developing and evaluating a lightweight Large Language Model (LLM) capable of generating professional transportation safety assessment reports from structured intersection characteristics.
 
-The study creates a synthetic instruction-following dataset representing diverse intersection conditions and uses parameter-efficient fine-tuning techniques to train a lightweight model capable of producing expert-style safety assessment reports.
+The project addresses the challenge of automating transportation engineering reporting by creating a synthetic instruction-tuning dataset and adapting a lightweight LLM through parameter-efficient fine-tuning using Low-Rank Adaptation (LoRA) within the Unsloth framework.
 
-The workflow includes:
+The developed system learns to interpret roadway geometric, operational, environmental, and safety-related characteristics and automatically generates engineering-style safety assessments, identifies critical deficiencies, evaluates risk levels, and recommends countermeasures.
 
-* Synthetic transportation safety dataset generation
-* Data preparation for instruction tuning
-* LoRA-based fine-tuning using the Unsloth framework
-* Quantitative and qualitative evaluation
-* Comparison of base and fine-tuned model performance
+The workflow consists of:
 
----
-
-## Project Objectives
-
-The primary objectives of this project are to:
-
-1. Generate a realistic transportation safety assessment dataset.
-2. Create instruction-input-output examples suitable for LLM fine-tuning.
-3. Fine-tune a lightweight language model using LoRA.
-4. Produce professional intersection safety reports automatically.
-5. Compare base-model and fine-tuned-model performance using engineering-focused evaluation criteria.
+1. Synthetic transportation safety dataset generation.
+2. Risk-based safety assessment logic.
+3. Instruction dataset preparation.
+4. LoRA-based model fine-tuning.
+5. Quantitative and qualitative evaluation.
+6. Automated generation of transportation safety reports.
 
 ---
 
-## Methodology
+## Project Highlights
 
-### 1. Synthetic Dataset Generation
+* Generated **300 synthetic intersection safety assessment cases**.
+* Created instruction-following datasets in **CSV**, **JSON**, and **Alpaca JSONL** formats.
+* Applied **LoRA fine-tuning** using the Unsloth framework.
+* Evaluated performance using **46 unseen test cases**.
+* Achieved substantial improvements over the base model.
+* Demonstrated the feasibility of lightweight transportation-domain LLMs for engineering report generation.
 
-A transportation-oriented synthetic dataset was generated programmatically using realistic combinations of roadway and traffic characteristics.
+---
 
-Variables include:
+## Transportation Features Included
+
+Each intersection scenario contains transportation-specific attributes including:
+
+### Geometric Characteristics
 
 * Intersection type
-* Area type
-* Traffic volume
-* Speed limit
 * Left-turn lane availability
-* Right-turn slip lanes
-* Pedestrian facilities
+* Right-turn slip lane availability
 * Bicycle facilities
+* Pedestrian facilities
+
+### Traffic Characteristics
+
+* Traffic volume
+* Posted speed limit
+* Heavy vehicle share
+
+### Environmental Characteristics
+
 * Lighting conditions
 * Visibility conditions
-* Roadside conditions
-* Pavement surface conditions
-* Traffic signage quality
+* Surface condition
+
+### Safety Characteristics
+
+* Roadside condition
+* Traffic signage and pavement markings
 * Signal operation status
 * Observed traffic conflicts
 * Crash history
 
-Each generated record contains:
-
-* **Instruction**
-* **Structured Input**
-* **Expert-style Safety Assessment Report**
-* **Risk Score**
-* **Risk Level**
-
 ---
 
-### 2. Risk-Based Safety Assessment
+## Dataset Development
 
-The framework employs transportation-engineering logic to estimate safety risk.
+A synthetic instruction-based transportation safety dataset was generated programmatically.
 
-Risk levels are determined from combinations of:
+Each sample consists of:
 
-* High traffic exposure
-* Poor visibility
-* Inadequate pedestrian facilities
-* Deficient signage
-* Crash history
-* Operational deficiencies
-* Roadside hazards
+### Instruction
 
-The generated reports include:
+Generate a professional intersection safety assessment report.
 
-* Overall safety assessment
-* Key safety concerns
-* Operational observations
+### Input
+
+Structured transportation and roadway characteristics.
+
+### Output
+
+Expert-style safety assessment report containing:
+
+* Safety risk summary
+* Operational concerns
+* Key deficiencies
 * Recommended countermeasures
 * Risk classification
 
----
+### Dataset Size
 
-### 3. Dataset Preparation
-
-Generated samples are exported in multiple formats:
-
-* CSV
-* JSON
-* Alpaca-style JSONL
-
-Dataset split:
-
-| Dataset    | Percentage |
-| ---------- | ---------- |
-| Training   | 70%        |
-| Validation | 15%        |
-| Testing    | 15%        |
-
-Total generated samples:
-
-**300 intersection safety assessment cases**
+| Dataset        | Samples |
+| -------------- | ------: |
+| Total Dataset  |     300 |
+| Training Set   |     210 |
+| Validation Set |      45 |
+| Testing Set    |   45–46 |
 
 ---
 
-### 4. Fine-Tuning Framework
+## Risk Assessment Framework
 
-The project is designed for lightweight instruction tuning using:
+The synthetic report generator incorporates transportation engineering reasoning through a rule-based risk scoring framework.
+
+Risk scores are influenced by:
+
+* High traffic demand
+* Elevated operating speeds
+* Missing turn lanes
+* Inadequate pedestrian facilities
+* Bicycle facility discontinuity
+* Poor lighting conditions
+* Restricted visibility
+* Inadequate signage
+* Roadside hazards
+* Recorded crash history
+
+Generated reports include corresponding engineering recommendations for each identified safety concern.
+
+---
+
+## Model Fine-Tuning
+
+The lightweight LLM was fine-tuned using:
 
 * Hugging Face Transformers
-* PEFT (Parameter-Efficient Fine-Tuning)
-* LoRA (Low-Rank Adaptation)
+* PEFT
 * TRL
+* LoRA
 * Unsloth
 
-Benefits include:
-
-* Reduced computational requirements
-* Faster training
-* Lower memory consumption
-* Efficient deployment
+The objective was to teach the model transportation-specific reasoning rather than generic text generation.
 
 ---
 
-### 5. Model Evaluation
+## Evaluation Methodology
 
-Performance is evaluated using a rubric-based framework comparing:
+Performance was evaluated using a rubric-based assessment framework.
 
-* Base model
-* Fine-tuned model
-
-Evaluation criteria:
+Evaluation dimensions:
 
 1. Relevance
 2. Completeness
 3. Clarity
 4. Overall Quality
 
-Scores are measured on a 1–5 scale.
+The base model and fine-tuned model were compared on 46 unseen test cases.
 
 ---
 
-## Results Summary
+## Quantitative Results
 
-The generated evaluation results demonstrate substantial improvement after fine-tuning.
+| Metric          | Base Model | Fine-Tuned Model |
+| --------------- | ---------: | ---------------: |
+| Relevance       |       2.17 |             4.90 |
+| Completeness    |       4.31 |             5.00 |
+| Clarity         |       4.52 |             5.00 |
+| Overall Quality |       3.66 |             4.97 |
 
-### Evaluation Metrics
+### Improvement
 
-The following metrics were used:
+| Metric          | Improvement |
+| --------------- | ----------: |
+| Relevance       |     +125.8% |
+| Completeness    |      +16.0% |
+| Clarity         |      +10.6% |
+| Overall Quality |      +35.8% |
 
-* Relevance (1–5)
-* Completeness (1–5)
-* Clarity (1–5)
-* Overall Quality (1–5)
+The largest improvement was observed in relevance, indicating that the fine-tuned model learned to focus on transportation safety concerns and generate reports aligned with roadway safety engineering practices.
 
-The fine-tuned model consistently achieved higher scores than the base model across all evaluation dimensions.
+---
 
-### Qualitative Findings
+## Qualitative Findings
 
 Compared with the base model, the fine-tuned model:
 
-* Produces more transportation-specific language.
-* Identifies critical safety deficiencies more accurately.
-* Provides clearer engineering recommendations.
-* Generates reports with improved structure and readability.
-* Demonstrates stronger alignment with professional intersection safety assessment practices.
+* Better identifies transportation safety deficiencies.
+* Produces more engineering-oriented reasoning.
+* Links roadway conditions to crash risk.
+* Generates clearer recommendations.
+* Creates professional report structures similar to transportation safety audit documentation.
 
-Example outputs indicate that the fine-tuned model produces detailed descriptions of:
+Example issues correctly identified by the model include:
 
-* Traffic operational issues
-* Safety risks
-* Pedestrian deficiencies
-* Crash-related concerns
-* Recommended engineering interventions
+* Turning conflicts
+* Rear-end crash potential
+* Bicycle safety deficiencies
+* Pedestrian exposure risks
+* Inadequate lighting
+* Roadside hazards
+* Insufficient traffic control devices
 
 ---
 
-## Project Structure
+## Repository Contents
 
 ```text
-project_outputs/
-│
-├── data/
-│   ├── dataset.csv
-│   ├── dataset.json
-│   └── dataset_alpaca.jsonl
-│
-├── models/
-│   └── fine_tuned_model/
+.
+├── Intersection_safety_assessment_LLM.ipynb
+├── datasets/
+│   ├── intersection_safety_dataset.csv
+│   ├── intersection_safety_dataset.json
+│   └── intersection_safety_dataset_alpaca.jsonl
 │
 ├── results/
 │   ├── base_vs_finetuned_evaluation.csv
 │   ├── qualitative_examples.csv
 │   └── methodology_summary.txt
 │
-└── notebooks/
-    └── Intersection_safety_assessment_LLM.ipynb
+├── models/
+│   └── fine_tuned_model/
+│
+└── README.md
 ```
-
----
-
-## Software Requirements
-
-Python Packages:
-
-```bash
-pandas
-numpy
-scikit-learn
-matplotlib
-tqdm
-transformers
-datasets
-accelerate
-peft
-trl
-sentencepiece
-bitsandbytes
-unsloth
-```
-
-Install dependencies:
-
-```bash
-pip install pandas numpy scikit-learn matplotlib tqdm
-pip install transformers datasets accelerate peft trl sentencepiece bitsandbytes
-pip install unsloth
-```
-
----
-
-## Applications
-
-Potential applications include:
-
-* Road safety audits
-* Intersection safety assessment
-* Transportation engineering education
-* Safety reporting automation
-* Traffic engineering decision support
-* Research in transportation-focused LLMs
-* Explainable transportation AI systems
-
----
-
-## Future Work
-
-Future extensions may include:
-
-* Integration with real crash databases.
-* Incorporation of traffic simulation outputs.
-* Use of aerial imagery and GIS information.
-* Explainable AI for report justification.
-* Multi-modal transportation safety assessment.
-* Deployment as a web-based safety assessment tool.
 
 ---
 
@@ -268,12 +222,16 @@ Future extensions may include:
 
 PhD Researcher
 
-Transportation Engineering, Traffic Safety, Explainable Artificial Intelligence, and Intelligent Transportation Systems Research
+Transportation Engineering | Traffic Safety | Explainable Artificial Intelligence | Intelligent Transportation Systems
 
 ---
 
 ## Citation
 
-If you use this project in academic research, please cite:
-
-> Abeje, B.T. Intersection Safety Assessment Reporting Using a Fine-Tuned Lightweight Large Language Model (LLM), 2026.
+```bibtex
+@misc{abeje2026intersection,
+  title={Fine-Tuning a Lightweight Large Language Model for Intersection Safety Assessment Reporting},
+  author={Abeje, Biruhi Tesfaye},
+  year={2026}
+}
+```
